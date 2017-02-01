@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>STUPID SOLDIER</title>
+
+    <!-- Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-gamequery/0.7.0/jquery.gamequery.min.js"></script>
+      
+     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+      <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+      
+<style>
+          
+body{
+    background:#444;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.title {
+    margin-left: auto;
+    margin-right: auto;
+    color: navajowhite;
+    text-align: center;
+    width: 50%;
+    margin-top: 16px;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 2em; 
+}
+    
+
+#container {
+    position: relative;
+    height: 480px;
+    width: 576px;
+    border: 2px solid black;
+    background-color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;             
+}
+
+    #sand1 {
+        position: absolute;
+        height: 5128px;
+        width: 576px;
+        background-image: url(sand-tile.png);
+        background-size: 64px;
+        background-repeat: repeat;
+        top: -128px;
+        
+    }
+    
+    #mountains {
+        position: absolute;
+        height: 64px;
+        width: 576px;
+        background-image: url(mountains-07.png);
+        background-size: 576px;
+        top: 0px;
+    }
+    
+    #movingsand {
+        position: absolute;
+        height: 992px;
+        width: 576px;
+        background-image: url(sand-tile.png);
+        background-size: 64px;
+        background-repeat: repeat;
+        top: 0px;
+        animation: movingsand;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+        animation-timing-function: linear;
+        opacity: 0;
+        
+        
+    }
+    
+    @keyframes movingsand {
+        from {
+            top: 0;
+        }
+        to {
+            top: -512px;
+        }
+    }
+    
+    #story {
+        position: absolute;
+        color: black;
+        text-align: center;
+        width: 50%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 550px;
+        left: 0;
+        right: 0;
+        font-family: 'Press Start 2P', sans-serif;
+        font-size: 1.5em;
+        line-height: 1.5em;
+    }
+    
+    @keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+        
+        
+    }
+    
+    #looserocks {
+        position: absolute;
+        color: black;
+        text-align: center;
+        width: 50%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 400px;
+        left: 0;
+        right: 0;
+        font-family: 'Press Start 2P', sans-serif;
+        font-size: 1.5em;
+        line-height: 1.5em;
+        animation: blink 1s infinite;
+        opacity: 0;
+    }
+    
+    #movedown {
+        position: absolute;
+        color: black;
+        text-align: center;
+        width: 50%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 400px;
+        left: 0;
+        right: 0;
+        font-family: 'Press Start 2P', sans-serif;
+        font-size: 1.5em;
+        line-height: 1.5em;
+        animation: blink 1s infinite;
+        opacity: 0;
+    }
+    #dodge {
+        position: absolute;
+        color: black;
+        text-align: center;
+        width: 50%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 400px;
+        left: 0;
+        right: 0;
+        font-family: 'Press Start 2P', sans-serif;
+        font-size: 1.5em;
+        line-height: 1.5em;
+        animation: blink 1s infinite;
+        display: none;
+    }
+          
+#hero {
+    position: absolute;
+    height: 64px;
+    width: 64px;
+    top: 70px;
+    left: 256px;
+   
+    /* for an image youd write something like:
+    background: url('image.png');
+    height: "its height";
+    width: "its width";
+    background-size: contain;
+    background-repeat: no-repeat;
+    */
+}
+    
+    #hero-holder {
+        position: absolute;
+        height: 64px;
+        width: 64px;
+        overflow: hidden;
+    }
+    
+    #sprite {
+        position: absolute;
+        width: 128px;
+    }
+    
+    #spinhero {
+    position: absolute;
+    height: 64px;
+    width: 64px;
+    background-image: url(spinhero.png);
+    background-size: 100%;
+        opacity: 0;
+        animation: rotate;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+        animation-timing-function: linear;
+
+}
+  
+    #walker{
+        position: absolute;
+        width: 128px;
+        top: 0;
+        animation: walker;
+        animation-duration: .8s;
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+        animation-timing-function: linear;
+        animation-timing-function: steps(2);
+        opacity: 0;
+        
+    }
+    
+    @keyframes walker {
+        from { 
+            left: 0px;
+        }
+        to {
+            left: -128px;
+        }
+    }
+    
+    #medtent {
+        position: absolute;
+        height: 96px;
+        width: 128px;
+        top: 48%;
+        left: 600px;
+        background-image: url(medtent-05.png);
+        
+    }
+    
+    #medtent img {
+        position: absolute;
+        height: 96px;
+        width: 128px;
+    }
+    
+    
+    .rock {
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    background-image: url(rock1-06.png);
+    background-size: 32px;
+       
+   
+}
+    #rock_1 {
+        left: 128px;
+        top: 530px;
+        animation: move1;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+
+    }
+    #rock_2 {
+        left: 416px;
+        top: 596px;
+        animation: move2;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+   
+    }
+    
+    @keyframes move1 {
+        0% {
+            left: 20px;
+        }
+        
+       
+        100% {
+            left: 250px;
+        }
+    }
+    
+    @keyframes move2 {
+        0% {
+            left: 544px;
+        }
+        
+        
+        100% {
+            left: 350px;
+        }
+    }
+    
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg);
+        }
+        
+        
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    #score_div {
+        height: 120px;
+        width: 80%;
+        position: absolute;
+        margin-left: 10%;
+        top: 10%;
+        background-color: bisque;
+        text-align: center;
+        font-size: 40px;
+        line-height: .4em;
+        margin-top: -20px;
+        font-family: 'Press Start 2P', sans-serif;
+        font-size: 1.5em;
+        line-height: 1.5em;
+        border-style: solid;
+        border-color: black;
+        border-width: 8px;
+        display: none;
+    }
+    #restart_btn {
+        position: absolute;
+        text-align: center;
+        top: 75%;
+        width: 70%;
+        left: 15%;
+        background-color: #c38a6d;
+        font-family: 'Press Start 2P', sans-serif;
+        font-size: 1.5em;
+        line-height: 1.5em;
+        border-style: solid;
+        border-color: black;
+        border-width: 8px;
+        cursor: pointer;
+        display: none;
+        
+    }
+    
+    #skip {
+        position: absolute;
+        height: 30px;
+        width: 60px;
+        bottom: 0;
+        right: 0;
+        padding-top: 5px;
+        font-family: 'press start 2p';
+        font-size: .8em;
+        cursor: pointer;
+        opacity: .5;
+    }
+    
+    #titlescreen {
+        position: absolute;
+        width: 576px;
+        height: 480px;
+        background-image: url(start-screen-08.png);
+        background-size: 576px;
+        
+    }
+    
+    #startbtn {
+        position: absolute;
+        height: 50px;
+        width: 250px;
+        color: black;
+        font-family: 'press start 2p', sans-serif;
+        font-size: 1.2em;
+        line-height: 1.5em;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+        cursor: pointer;
+        animation: bob;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: linear;
+    }
+    
+    @keyframes bob {
+        from {
+            bottom: 10px;
+        }
+        to {
+            bottom: 30px;
+        }
+    }
+    
+    #herostart {
+        position: absolute;
+        height: 64px;
+        width: 64px;
+        overflow: hidden;
+        bottom: 80px;
+        animation: startmove;
+        animation-duration: 10s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        
+    }
+    
+    #herostartwalker {
+        position: absolute;
+        width: 128px;
+        top: -64px;
+        animation: walker;
+        animation-duration: .8s;
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+        animation-timing-function: linear;
+        animation-timing-function: steps(2);
+        
+    }
+    
+    @keyframes startmove {
+        from {
+            left: -128px;
+        }
+        to {
+            left: 650px;
+        }
+    }
+    
+    /* //////////////////// */
+    
+    @media screen and (max-width: 649px){
+        
+        #mobile-control {
+        height: 250px;
+        width: 370px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+    }
+    #down {
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: black;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    #up {
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        background-color: black;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    #right {
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        right: 0;
+        top: 28%;
+        background-color: black;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    #left {
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        top: 28%;
+        background-color: black;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+        
+        #mobilesprite {
+            height: 32px;
+            width: 32px;
+            background-image: url(spritesheet.png);
+            background-size: 64px;
+        }
+        
+        #titlescreen {
+        position: absolute;
+        width: 370px;
+        height: 250px;
+        background-image: url(start-screen-08.png);
+        background-size: 370px;
+        }
+        
+        #startbtn {
+            color: white;
+        }
+        
+        #herostart {
+            display: none;
+        }
+        
+        .title {
+    font-size: 1em; 
+}
+    
+
+#container {
+    height: 250px;
+    width: 370px;            
+}
+
+    #sand1 {
+        width: 370px;
+        background-size: 32px;  
+        height: 6000px;
+    }
+    
+    #mountains {
+        height: 64px;
+        width: 370px;
+        background-size: 205px;
+        background-repeat: repeat-x;
+    }
+    
+    #movingsand {
+        width: 370px;
+        background-size: 32px;
+    }
+  
+    
+    #story {
+        font-size: 1em;
+        line-height: 1.5em;
+    }
+    
+    
+    #looserocks {
+        margin-top: 200px;
+        font-size: 1em;
+        line-height: 1.5em;
+    }
+    
+    #movedown {
+        width: 75%;
+        margin-top: 200px;
+        font-size: 1em;
+        line-height: 1.5em;
+        }
+        
+    #dodge {
+        width: 75%;
+        margin-top: 200px;
+        font-size: 1em;
+        line-height: 1.5em;
+        }
+          
+#hero {
+    height: 32px;
+    width: 32px;
+    top: 38px;
+    left: 180px;
+}
+    
+    #hero-holder {
+        height: 32px;
+        width: 32px;
+        display: none;
+    }
+    
+    #sprite {
+        width: 64px;
+        display: none;
+    }
+    
+    #spinhero {
+    position: absolute;
+    height: 32px;
+    width: 32px;
+}
+  
+    #walker{
+        width: 64px;
+        animation: none;
+        display: none;
+    }
+    
+    
+    #medtent {
+        position: absolute;
+        height: 64px;
+        width: 96px;
+        top: 48%;
+        left: 600px;
+        background-image: url(medtent-05.png);
+        
+    }
+    
+    #medtent img {
+        position: absolute;
+        height: 64px;
+        width: 96px;
+    }
+    
+    
+    .rock {
+    height: 16px;
+    width: 16px;
+    background-size: 16px;
+}
+    #rock_1 {
+        left: 64px;
+
+    }
+    #rock_2 {
+        left: 208px;
+        }
+   
+
+    #score_div {
+        height: 80px;
+        width: 80%;
+        position: absolute;
+        margin-left: 10%;
+        top: 10%;
+        background-color: bisque;
+        text-align: center;
+        font-family: 'Press Start 2P', sans-serif;
+        font-size: 1em;
+        line-height: 1.5em;
+    }
+    #restart_btn {
+        position: absolute;
+        text-align: center;
+        top: 75%;
+        width: 70%;
+        left: 15%;
+        background-color: #c38a6d;
+        font-family: 'Press Start 2P', sans-serif;
+        font-size: 1em;
+        line-height: 1.5em;
+    }
+    }
+    
+  
+    
+         
+</style>
+      
+  </head>
+  <body>
+      <div class="title"><p><span class="strong">STUPID HERO</span></p></div>
+      
+    <div id="container">
+        <div id="sand1"></div><div id='movingsand'></div>
+        <div id="rock_1" class="rock"></div>
+        <div id="rock_2" class="rock"></div>
+        
+        
+        <div id="story">The United States Army is the most highly trained, sophisticated, and dangerous military force in the world. Soldiers train for years to learn how to react and adapt to any evolving enemy situation. But it's never what they expect that ends up being the real threat. </div>
+        
+        
+        <div id="hero"><div id="hero-holder"><img src="spritesheet.png" id="walker"><img src="spritesheet.png" id="sprite"></div><div id="spinhero"></div><div id="mobilesprite"></div></div>
+        
+        <div id="medtent"><img src="medtent-05.png"></div>
+        
+        <div id="movedown">Let's go! Hurry up!</div>
+        <div id="looserocks">Watch out! Loose rocks!</div>
+        <div id="dodge">Dodge the rocks!</div>
+        
+        <div id="mountains"></div>
+        
+        <div id="score_div">
+      <p>Oh no! You got <span id="score">0</span> stitches!</p>
+      </div>
+      
+        <div id="restart_btn">Restart your mission?</div>
+        <div id="skip">skip</div>
+        
+        <div id="titlescreen"><div id="startbtn">Start Mission</div><div id="herostart"><img src="spritesheet.png" id="herostartwalker"></div></div>
+        
+    </div>
+      <div id="mobile-control">
+          <div id="up"></div>
+          <div id="left"></div>
+          <div id="down"></div>
+          <div id="right"></div>
+          
+          
+      </div>
+      
+    
+    
+      <script>
+     
+      $(function() {
+          
+          var container = $('#container');
+          
+          var hero = $('#hero');
+          var sprite = $('#sprite');
+          var spinhero = $('#spinhero');
+          var walker = $('#walker');
+          var heroholder = $('#hero-holder');
+          
+          var score = $('#score');
+          var speed_span = $('#speed');
+          var restart_btn = $('#restart_btn');
+          
+          var sand1 = $('#sand1');
+          var movingsand = $('#movingsand');
+          
+          var story = $('#story');
+          var movedown = $('#movedown');
+          var looserocks = $('#looserocks');
+          var dodge = $('#dodge');
+          var score_div = $('#score_div');
+          var medtent = $('#medtent');
+         
+          
+          var rock = $('.rock');
+          var rock_1 = $('#rock_1');
+          var rock_2 = $('#rock_2');
+          var rock_1_initial_position = parseInt(rock_1.css('top'));
+          var rock_2_initial_position = parseInt(rock_2.css('top'));
+          var rock_1_initial_left = parseInt(rock_1.css('left'));
+          var rock_2_initial_left = parseInt(rock_2.css('left'));
+          
+          
+          var container_width = parseInt(container.width());
+          var container_height = parseInt(container.height());
+          var hero_left = parseInt(hero.css('left'));
+          var hero_height = parseInt(hero.height());
+          var speed = 10;
+          var speed_1 = 6;
+          var speed_2 = 6;
+          
+          var looper;
+          var degrees = 0;
+          
+          var downer = $('#down');
+          var uper = $('#up');
+          var lefter = $('#left');
+          var righter = $('#right');
+          
+          var skip = $('#skip');
+          
+          var titlescreen = $('#titlescreen');
+          var startbtn = $('#startbtn');
+       
+          
+          var score_updated = false;
+          var game_over = false;
+          
+          
+          
+          // setInterval with the 40 down there means:
+          // every 40 miliseconds something happens. a function operates a thing
+          
+          startbtn.click(function () {
+              titlescreen.fadeOut('fast');
+          });
+          
+          var desert_walk = setInterval(function () {
+              
+              //sets it up so if hero collides with anything game over
+              
+              if(parseInt(hero.css('left')) < 0){
+                  hero.stop();
+                 hero.css('left', 0);
+              }
+              if(parseInt(sand1.css('top')) > -64){
+                  sand1.stop();
+                 sand1.css('top', -64);
+              }
+              if(parseInt(hero.css('left')) > container_width - hero_height){
+                  hero.stop();
+                 hero.css('left', container_width - hero_height);
+              }
+              if(parseInt(sand1.css('top')) > -3800 || parseInt(sand1.css('top')) <= -4500){
+                 looserocks.fadeOut(40);}
+              
+              if(parseInt(sand1.css('top')) < -3800 && parseInt(sand1.css('top')) > -4500){
+                 looserocks.fadeIn('fast');}
+             
+                
+          });
+          
+        
+            var the_game = setInterval(function () {
+              
+        if(parseInt(sand1.css('top')) <= -4500) {
+            
+            
+                
+              //sets it up so if hero collides with anything game over
+              if(collision(hero, rock_1) || collision(hero, rock_2) || parseInt(hero.css('top')) <= 0 || parseInt(hero.css('top')) > container_height - hero_height){
+                  
+                  hero.stop();
+                  stop_the_game();
+                  spinhero.animate({
+                "opacity": '0',
+            }, 'fast');
+                  movingsand.animate({
+                "opacity": '0',
+            }, 'fast');
+                  
+                 sprite.fadeIn(20);
+                 
+                  
+                  rock.fadeOut('fast', 0);
+                  dodge.fadeOut('fast', 0);
+                  
+                  
+              }else{
+                  
+              
+              var rock_1_current_position = parseInt(rock_1.css('top'));
+              var rock_2_current_position = parseInt(rock_2.css('top'));
+              var rock_1_left = parseInt(rock_1.css('left'));
+              var rock_2_left = parseInt(rock_2.css('left'));
+                  
+                  sprite.stop();
+                  spinhero.stop();
+                  dodge.stop();
+                  heroholder.stop();
+           
+                 
+                  dodge.fadeIn(20);
+                 sprite.fadeOut(20);
+                 walker.fadeOut(20);
+               spinhero.animate({
+                "opacity": '1',
+            }, 20);
+                  movingsand.animate({
+                "opacity": '1',
+            }, 20);
+                  skip.fadeOut(20);
+                  $('#mobilesprite').fadeOut('fast');
+                  
+                  
+                      
+                  
+            if(rock_1_current_position < 0){
+            if(score_updated === false){
+            score.text(parseInt(score.text()) + 1);
+            score_updated = true;
+              
+                  // ^^^ basically, after 1 is added the function makes the score_updated to true, so it doesnt add anymore number after the 1
+                  }
+              }
+            // we need to bring the rocks back now though
+              //check and see if the rocks have left the container and bring them back to the other side
+             if (rock_1_current_position < -114) {
+                 //new heights for the poles
+                  var new_left_1 =
+                    //.random gives between 0 and .99999~
+                      parseInt(Math.random() * 200) - 100;
+                 
+                  
+                  //changing the height
+                  rock_1.css('left', rock_1_initial_left + new_left_1);
+                 
+                 
+                 //increase speed
+                 speed_1 = speed_1 + parseInt(Math.random() * 4);
+                 
+                 //specifically to reset back to false so the score keeps counting
+                  score_updated = false;
+                 
+                  rock_1_current_position = rock_1_initial_position;
+                 rock_1_left = rock_1_initial_left;
+              }
+                  
+            
+                if (rock_2_current_position < -50) {
+                 //new heights for the poles
+                 var new_left_2 =
+                    //.random gives between 0 and .99999~
+                      parseInt(Math.random() * 300) - 150;
+                  
+                  //changing the height
+                  rock_2.css('left', rock_2_initial_left + new_left_2);
+                 
+                 
+                  
+                 //increase speed
+                  speed_2 = speed_2 + parseInt(Math.random() * 4);
+                 
+                 //specifically to reset back to false so the score keeps counting
+                  score_updated = false;
+                 
+                  rock_2_current_position = rock_2_initial_position;
+              }
+                  
+             
+              
+                  
+              // we have to make the rocks move, but how do we do that?
+              //call the rock css target 'right' and tell it to make it into the current position plus the speed
+                  
+                  
+    
+                  
+              rock_2.css('top', rock_2_current_position - speed_2);
+              rock_1.css('top', rock_1_current_position - speed_1);
+                  
+         
+              }
+        }
+          }, 40);
+        
+          
+          skip.click(function() {
+     if (game_over === false) {
+            sand1.css('top', '-4500px');
+             story.animate({"top": "-=4500"}, "fast");
+             movedown.fadeOut('fast', 0);
+     }
+          });
+          
+          downer.click(function() {
+     if (game_over === false && parseInt(sand1.css('top')) > -4500) {
+            sand1.animate({"top": "-=64"}, "fast");
+             story.animate({"top": "-=32"}, "fast");
+             movedown.fadeOut('fast', 0);
+     }
+});
+          uper.click(function() {
+     if (game_over === false && parseInt(sand1.css('top')) > -4500) {
+             sand1.animate({"top": "+=64"}, "fast");  
+             story.animate({"top": "+=32"}, "fast");
+     }
+});     
+          lefter.click(function() {
+           if (game_over === false) {
+      
+            hero.animate({"left": "-=64"}, "fast");
+     }
+});
+          righter.click(function() {
+           if (game_over === false) {
+            hero.animate({"left": "+=64"}, "fast");
+     }
+});
+          
+          $(document).bind('keydown', function(e) {
+          var left = 37,
+              up = 38,
+              right = 39,
+              down = 40
+          hero.stop();
+          sand1.stop();
+          story.stop();
+              
+          if (e.keyCode == left && game_over === false) {
+      
+         hero.animate({"left": "-=64"}, "fast");
+              
+         sprite.css('top', "-128px");
+         sprite.css('left', '-64px');
+         sprite.fadeOut(100);
+                
+         walker.css('top', "-128px").css('opacity', 1);
+
+          }
+              
+         if (e.keyCode == up && game_over === false &&   parseInt(sand1.css('top')) > -4500) {
+             
+             sand1.animate({"top": "+=64"}, "fast");  
+             story.animate({"top": "+=32"}, "fast");
+             
+             sprite.css('top', "-192px");
+             sprite.css('left', '-64px');
+             sprite.fadeOut(100);
+                
+             walker.css('top', "-192px").css('opacity', 1);
+             
+             if(parseInt(sand1.css('top')) > -375){
+                 movedown.fadeIn('fast');}
+      
+         }
+         if (e.keyCode == right && game_over === false) {
+            hero.animate({"left": "+=64"}, "fast");
+             sprite.css('top', "-64px");
+             sprite.css('left', '-64px');
+             sprite.fadeOut(100);
+                
+             walker.css('top', "-64px").css('opacity', 1);
+
+         }
+         if (e.keyCode == down && game_over === false && parseInt(sand1.css('top')) > -4500) {
+            sand1.animate({"top": "-=64"}, "fast");
+             story.animate({"top": "-=32"}, "fast");
+             movedown.fadeOut('fast', 0);
+             sprite.css('top', "0px");
+             sprite.css('left', '-64px');
+             sprite.fadeOut(100);
+                
+             walker.css('top', "0px").css('opacity', 1);
+         
+             
+             if(parseInt(sand1.css('top')) < -4200) {
+            
+              heroholder.animate({
+                "left": '+=20',
+            }, 'fast');
+             heroholder.animate({
+                "left": '-=10',
+            }, 'fast');}
+             
+            
+             /*
+             if(parseInt(sand1.css('top')) < -4430) {
+                 sprite.fadeOut('fast');
+             }
+             if(parseInt(sand1.css('top')) < -4430) { 
+               spinhero.animate({
+                "opacity": '1',
+            }, 'fast');}
+              */   
+             
+
+         }  
+              });
+          
+          $(document).bind('keyup', function(e) {
+          var left = 37,
+              up = 38,
+              right = 39,
+              down = 40
+          
+          if (e.keyCode == left && game_over === false) {
+              
+              sprite.stop();
+    
+              walker.css('opacity', 0);
+              if(parseInt(sand1.css('top')) > -4500) {
+                   sprite.css('left', "0px").fadeIn(0);
+               }
+          }
+              
+           if (e.keyCode == right && game_over === false) {
+        
+              sprite.stop();
+              walker.css('opacity', 0);
+               if(parseInt(sand1.css('top')) > -4500) {
+                   sprite.css('left', "0px").fadeIn(0);
+               }
+           }      
+              
+            if (e.keyCode == up && game_over === false &&   parseInt(sand1.css('top')) > -4500) {
+              sprite.stop();
+              sprite.css('left', "0px").fadeIn(0);
+              walker.css('opacity', 0);
+            }
+         
+         
+         if (e.keyCode == down && game_over === false &&   parseInt(sand1.css('top')) > -4500) {
+             
+              sprite.stop();
+              sprite.css('left', "0px").fadeIn(0);
+              walker.css('opacity', 0);
+         }
+ 
+           
+              });
+          
+ //this isnt working either. maybe its time i went back to css keyframes and toggled opacity to make walk animation
+
+          
+          
+          
+           function stop_the_game(){
+              clearInterval(the_game);
+              game_over = true;
+               hero.stop();
+               
+               hero.fadeIn(20);
+               
+              hero.animate({
+                  'top': "50%",
+                  'left': '45%',
+              }, 'slow');
+               
+               
+              hero.promise().done(function () {
+                  
+                  medtent.animate({
+                      'left': '40%',
+                  }, 'slow').delay(1000);
+                  
+                  medtent.promise().done(function () {
+                  score_div.slideDown().delay(2000);
+                      
+                      score_div.promise().done(function() {
+                      restart_btn.slideDown();
+                      });
+                      
+                      });
+                  
+                  
+              });
+          }
+          
+          //restarts the game
+          restart_btn.click(function () {
+              
+              location.reload();
+          });
+          
+          
+          
+          //basically a collision plugin
+          function collision($div1, $div2) {
+              var x1 = $div1.offset().left;
+              var y1 = $div1.offset().top;
+              var h1 = $div1.outerHeight(true); 
+              var w1 = $div1.outerWidth(true);
+              var b1 = y1 + h1;
+              var r1 = x1 + w1;
+              var x2 = $div2.offset().left;
+              var y2 = $div2.offset().top;
+              var h2 = $div2.outerHeight(true); 
+              var w2 = $div2.outerWidth(true);
+              var b2 = y2 + h2;
+              var r2 = x2 + w2;
+              
+              if(b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+              return true;
+          }
+          
+          window.addEventListener("keydown", function(e) {
+    // space and arrow keys
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
+          
+    });      
+          /*
+          $(document).bind('keydown', function(e) {
+          var left = 37,
+              up = 38,
+              right = 39,
+              down = 40
+          hero.stop();
+          if (e.keyCode == left) {
+      
+         hero.animate({"left": "-=30"}, "fast");
+          }
+         if (e.keyCode == up) {
+         hero.animate({"top": "-=30"}, "fast");
+        
+    }
+    if (e.keyCode == right) {
+        hero.animate({"left": "+=30"}, "fast");
+       
+    }
+    if (e.keyCode == down) {
+        hero.animate({"top": "+=30"}, "fast");
+  
+    }
+    
+
+    
+});
+*/
+      
+            
+      
+      </script>
+
+      
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </body>
+</html>
